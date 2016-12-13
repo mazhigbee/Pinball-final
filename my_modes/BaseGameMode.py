@@ -63,6 +63,9 @@ class BaseGameMode(procgame.game.AdvancedMode):
         player.setState('idle_balls', 0)
         player.setState('leftTargets', [False, False, False, False, False])
         player.setState('kickbackEnabled', False)
+        player.setState('standupRT', False)
+        player.setState('standupRM', False)
+        player.setState('standupRB',False)
 
         """
         Notice that progress is stored in the player object, so check with:
@@ -296,6 +299,21 @@ class BaseGameMode(procgame.game.AdvancedMode):
         self.game.lamps.standupMidR.enable()
         self.checkAllSwitches()
         return procgame.game.SwitchContinue
+    def sw_standupRightT_active(self,sw):
+        self.game.setPlayerState('standupRT', True)
+        self.game.lamps.standupRightT.enable()
+        self.checkAllSwitches()
+        return procgame.game.SwitchContinue
+    def sw_standupRightM_active(self,sw):
+        self.game.setPlayerState('standupRM', True)
+        self.game.lamps.standupRightM.enable()
+        self.checkAllSwitches()
+        return procgame.game.SwitchContinue
+    def sw_standupRightB_active(self,sw):
+        self.game.setPlayerState('standupRB', True)
+        self.game.lamps.standupRightB.enable()
+        self.checkAllSwitches()
+        return procgame.game.SwitchContinue
 
     def checkAllSwitches(self):
         """ called by each of the standupMid? handlers to
@@ -312,8 +330,25 @@ class BaseGameMode(procgame.game.AdvancedMode):
                 self.game.setPlayerState('standupSwitchL', False)
                 self.game.setPlayerState('standupSwitchC', False)
                 self.game.setPlayerState('standupSwitchR', False)
+
+        #a check for invincibilty mode
+        if((self.game.getPlayerState('standupRT') == True) and
+            (self.game.getPlayerState('standupRM') == True) and
+            (self.game.getPlayerState('standupRB') == True)):
+                self.game.displayText("invincibility mode activated")
+                self.game.score(5000)
+                #self.game.sound play zen line
+                self.game.lamps.standupRightT.disable()
+                self.game.lamps.standupRightM.disable()
+                self.game.lamps.standupRightB.disable()
+                self.game.setPlayerState('standupRT', False)
+                self.game.setPlayerState('standupRM', False)
+                self.game.setPlayerState('standupRB', False)
+                self.game.modes.add(self.game.invincibility_mode)
         else:
-                self.game.sound.play('target')
+            self.game.sound.play('target')
+
+
 
     """ An alternate way of handling a bank of related switches
         using lists (for switch states and lamps) we can have

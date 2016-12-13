@@ -115,9 +115,9 @@ Sequence:
         sound: target_bank
     - Combo:
         Text:
-            - "Terminator"
+            - "UnderWatched"
             - ""
-            - "2.0"
+            - "0.0"
         Font: med
         # Animation: chrome
         FontStyle: blueish
