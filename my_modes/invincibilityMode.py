@@ -13,4 +13,5 @@ class invincibilityMode(procgame.game.AdvancedMode):
     pass
 
 def mode_started(self):
+    self.lamps.
     pass
