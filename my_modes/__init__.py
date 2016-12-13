@@ -1,9 +1,9 @@
 __all__ = [
     'BaseGameMode',
     'ExampleBlankMode',
-    'SkillShotMode',
+    'SkillshotMode',
     ]
-#add new modes here and ^
+
 from BaseGameMode import *
 from ExampleBlankMode import *
-from SkillShotMode import *
+from SkillshotMode import *
