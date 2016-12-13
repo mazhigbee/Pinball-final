@@ -6,14 +6,14 @@ class SkillshotMode(procgame.game.AdvancedMode):
   Skill shot Mode
   """
   def __init__(self, game):
-    super(SkillshotMode, self).__init__(game=game, 
+    super(SkillshotMode, self).__init__(game=game,
       priority=10, mode_type=AdvancedMode.Ball) # 10 is the highest so far
     # stuff that gets done EXACTLY once.
     # happens when the "parent" Game creates this mode
     pass
 
-  """ 
-  called when the mode is activated (added to the queue) 
+  """
+  called when the mode is activated (added to the queue)
   """
   def mode_started(self):
     self.number = 1
@@ -22,7 +22,7 @@ class SkillshotMode(procgame.game.AdvancedMode):
     self.delay(name="next_target", delay=1.0, handler=self.next_target)
 
   """
-  a function that changes number by direction, 
+  a function that changes number by direction,
   keeping the number between 1 and 5; also displays
   the number on the screen
   """
@@ -33,7 +33,7 @@ class SkillshotMode(procgame.game.AdvancedMode):
       self.direction = -1
     elif(self.number == 1):
       self.direction = 1
-    self.game.displayText("Hit target %d" % self.number)
+    #self.game.displayText("Hit target %d" % self.number)
     # self.game.lamps.target3.schedule(0xf0f0f0)
     self.game.lamps["target%d" % self.number].schedule(0xf0f0f0)
     self.delay(name="next_target", delay=1.0, handler=self.next_target)
@@ -45,13 +45,13 @@ class SkillshotMode(procgame.game.AdvancedMode):
     self.game.lamps.target4.disable()
     self.game.lamps.target5.disable()
     self.game.sound.fadeout_music()
-    self.game.sound.play_music('base-music-bgm')
+    self.game.sound.play_music('overwatch-main')
 
   def evt_ball_starting(self):
     self.game.sound.stop_music()
     self.game.sound.play_music('skillshot')
     self.game.displayText("Hit the flashing target!")
-    
+
 
   def sw_gripTrigger_active(self, sw):
     if(self.game.switches.shooter.is_active()):
@@ -60,11 +60,11 @@ class SkillshotMode(procgame.game.AdvancedMode):
 
   def checktarget(self, target_num):
     if(self.number == target_num):
-      self.game.displayText("Skillshot!")
+      self.game.displayText("Target Hit")
       self.game.score(1000000)
-      self.game.sound.play('skillshot_hit')
+      self.game.sound.play('hanzo_stronger')
     else:
-      self.game.sound.play('skillshot_miss')      
+      self.game.sound.play('mei_miss')
     self.game.modes.remove(self)
     return procgame.game.SwitchStop
 
@@ -83,4 +83,3 @@ class SkillshotMode(procgame.game.AdvancedMode):
 
   def sw_target5_active(self, sw):
     return self.checktarget(5)
-

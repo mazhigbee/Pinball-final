@@ -8,7 +8,7 @@ from pygame.font import *
 class BaseGameMode(procgame.game.AdvancedMode):
     """
     An example of a mode that runs whenever the GAME is in progress.
-    Notice the super() function call in __init__ below specifies 
+    Notice the super() function call in __init__ below specifies
      the mode_type is set to AdvancedMode.Game.  This means:
     - it is automatically added when a game starts
         (mode_started will be called once per game)
@@ -24,10 +24,10 @@ class BaseGameMode(procgame.game.AdvancedMode):
     """
 
     def __init__(self, game):
-        """ 
-        The __init__ function is called automatically whenever an instance 
+        """
+        The __init__ function is called automatically whenever an instance
         of this object is created --e.g., whenever the code:
-                something = new BaseGameMode() 
+                something = new BaseGameMode()
         is executed, this __init__ function is called
         """
 
@@ -44,8 +44,8 @@ class BaseGameMode(procgame.game.AdvancedMode):
         # self.leftTargets = [False, False, False, False, False]
         # self.kickbackEnabled = False
 
-        # you CAN do this, and it's OK to do so, but these are properties 
-        #  of the PLAYER not the mode, so if there's more than one player, 
+        # you CAN do this, and it's OK to do so, but these are properties
+        #  of the PLAYER not the mode, so if there's more than one player,
         #  when the player number changes, these are no longer valid, but we
         #  may want to restore them when this player's turn resumes.
 
@@ -57,37 +57,37 @@ class BaseGameMode(procgame.game.AdvancedMode):
             the player argument is the newly created player who has just been added
         """
         player.setState('multiplier', 0)
-        player.setState('standupSwitchL', False) 
-        player.setState('standupSwitchC', False) 
-        player.setState('standupSwitchR', False) 
+        player.setState('standupSwitchL', False)
+        player.setState('standupSwitchC', False)
+        player.setState('standupSwitchR', False)
         player.setState('idle_balls', 0)
         player.setState('leftTargets', [False, False, False, False, False])
         player.setState('kickbackEnabled', False)
-        
+
         """
         Notice that progress is stored in the player object, so check with:
             self.game.getPlayerState(key)
         which is a wrapper around:
             self.game.get_current_player().getState(key)
         """
-        
+
     def evt_ball_starting(self):
         """ an event that gets fired when a ball is starting (for any player) """
 
-        # since we might actually want to account for time spent in the trough, 
+        # since we might actually want to account for time spent in the trough,
         # let's reset the timer when the shooter lane goes inactive.
 
         self.game.sound.fadeout_music()
-        self.game.sound.play_music('base-music-bgm')
+        self.game.sound.play_music('overwatch-main')
 
     def shooter_inactive_for_250ms(self):
         # ball saver syntax has changed.  We no longer need to supply a callback
         # method instead, evt_ball_saved() will be called if a ball is saved.
-        # to enable it, use this 
+        # to enable it, use this
         # (defaults are 1 ball, save time length is based on service mode setting)
 
         self.game.enable_ball_saver()
-        
+
 
     def evt_ball_saved(self):
         """ this event is fired to notify us that a ball has been saved
@@ -103,12 +103,12 @@ class BaseGameMode(procgame.game.AdvancedMode):
         """
         the mode_started method is called whenever this mode is added
         to the mode queue; this might happen multiple times per game,
-        depending on how the Game itself adds/removes it.  B/C this is 
+        depending on how the Game itself adds/removes it.  B/C this is
         an advancedMode, we know when it will be added/removed.
         """
         self.game.coils.dropTarget.pulse()
 
-    def mode_stopped(self): 
+    def mode_stopped(self):
         """
         the mode_stopped method is called whenever this mode is removed
         from the mode queue; this might happen multiple times per game,
@@ -117,7 +117,7 @@ class BaseGameMode(procgame.game.AdvancedMode):
         pass
 
     def update_lamps(self):
-        """ 
+        """
         update_lamps is a very important method -- you use it to set the lamps
         to reflect the current state of the internal mode progress variables.
         This function is called after a lampshow is played so that the state
@@ -132,7 +132,7 @@ class BaseGameMode(procgame.game.AdvancedMode):
         if(self.game.getPlayerState('kickbackEnabled')==True):
                 self.game.lamps.kickback.enable()
         else:
-                self.game.lamps.kickback.disable()      
+                self.game.lamps.kickback.disable()
 
         if(self.game.getPlayerState('multiplier') == 2):
             self.game.lamps.mult2x.enable()
@@ -145,12 +145,12 @@ class BaseGameMode(procgame.game.AdvancedMode):
         else:
             self.game.lamps.standupMidL.disable()
 
-        if(self.game.getPlayerState('standupSwitchC')): 
+        if(self.game.getPlayerState('standupSwitchC')):
             self.game.lamps.standupMidC.enable()
         else:
             self.game.lamps.standupMidC.disable()
 
-        if(self.game.getPlayerState('standupSwitchR')): 
+        if(self.game.getPlayerState('standupSwitchR')):
             self.game.lamps.standupMidR.enable()
         else:
             self.game.lamps.standupMidR.disable()
@@ -165,15 +165,15 @@ class BaseGameMode(procgame.game.AdvancedMode):
             if(target):
                 lamp.enable()
             else:
-                lamp.disable()                        
+                lamp.disable()
 
-    """ The following are the event handlers for events broadcast by SkeletonGame.  
+    """ The following are the event handlers for events broadcast by SkeletonGame.
         handling these events lets your mode give custom feedback to the player
         (lamps, dmd, sound, etc)
     """
 
     def evt_ball_ending(self, (shoot_again, last_ball)):
-        """ this is the handler for the evt_ball_ending event.  It shows    
+        """ this is the handler for the evt_ball_ending event.  It shows
             the player information about the specific event.  You can optionally
             return a number, which is the number of seconds that you are requesting
             to delay the commitment of the event.  For example, if I wanted to show
@@ -215,11 +215,11 @@ class BaseGameMode(procgame.game.AdvancedMode):
     """
     def sw_outhole_active_for_200ms(self,sw):
             self.game.coils.outhole.pulse()
-        
+
     def sw_ballPopper_active_for_200ms(self, sw):
         # ballPopper is the vertical up kicker (VUK) in the Skull.
         # note that blindly kicking the ball up is unwise...
-        
+
         # check via something like:
         #if(self.game.gun_mode.clearToLaunchFromSkull()):
         #    self.game.coils.ballPopper.pulse()
@@ -237,22 +237,22 @@ class BaseGameMode(procgame.game.AdvancedMode):
         self.game.coils.lockTop.pulse()
         return procgame.game.SwitchStop
 
-    def sw_rampRightEnter_active(self, sw):       
-        # self.game.displayText("Right Ramp Enter")    
+    def sw_rampRightEnter_active(self, sw):
+        # self.game.displayText("Right Ramp Enter")
         return procgame.game.SwitchStop
 
     def rampRightMade_active(self, sw):
         self.game.score(500)
-        # self.game.displayText("Right Ramp Made")    
+        # self.game.displayText("Right Ramp Made")
         return procgame.game.SwitchStop
 
-    def sw_rampLeftEnter_active(self, sw):    
-        # self.game.displayText("Left Ramp Enter")    
+    def sw_rampLeftEnter_active(self, sw):
+        # self.game.displayText("Left Ramp Enter")
         return procgame.game.SwitchStop
 
     def sw_rampLeftMade_active(self, sw):
         self.game.score(500)
-        # self.game.displayText("Left Ramp Made")    
+        # self.game.displayText("Left Ramp Made")
         return procgame.game.SwitchStop
 
     def kickback_disabler(self):
@@ -271,26 +271,26 @@ class BaseGameMode(procgame.game.AdvancedMode):
         else:
             self.game.displayText("Too bad")
 
-        return procgame.game.SwitchContinue   
+        return procgame.game.SwitchContinue
 
     """ The following methods illustrate handling a bank of related
-        targets.  Notice that the logical state of the switch is 
+        targets.  Notice that the logical state of the switch is
         stored in the player's object.  Each of these functions
         are VERY similar, and that might be annoying to you
         (and should be).  An example of a 'better way' follows these.
     """
-    def sw_standupMidL_active(self, sw): 
+    def sw_standupMidL_active(self, sw):
         self.game.setPlayerState('standupSwitchL',True)
         self.game.lamps.standupMidL.enable()
         self.checkAllSwitches()
-        return procgame.game.SwitchContinue 
-        
+        return procgame.game.SwitchContinue
+
     def sw_standupMidC_active(self, sw):
         self.game.setPlayerState('standupSwitchC',True)
         self.game.lamps.standupMidC.enable()
         self.checkAllSwitches()
         return procgame.game.SwitchContinue
-        
+
     def sw_standupMidR_active(self, sw):
         self.game.setPlayerState('standupSwitchR',True)
         self.game.lamps.standupMidR.enable()
@@ -298,7 +298,7 @@ class BaseGameMode(procgame.game.AdvancedMode):
         return procgame.game.SwitchContinue
 
     def checkAllSwitches(self):
-        """ called by each of the standupMid? handlers to 
+        """ called by each of the standupMid? handlers to
             determine if the bank has been completed """
         if((self.game.getPlayerState('standupSwitchL') == True) and
             (self.game.getPlayerState('standupSwitchC') == True) and
@@ -333,28 +333,28 @@ class BaseGameMode(procgame.game.AdvancedMode):
             self.game.leftTargetLamps[targetNum].enable()
             self.game.sound.play('target')
         else:
-            self.game.setPlayerState('leftTargets',vals)            
+            self.game.setPlayerState('leftTargets',vals)
             self.game.score(50000)
             self.game.sound.play('target_bank')
             self.game.displayText("LEFT TARGETS COMPLETE!", 'explosion')
             self.game.setPlayerState('leftTargets',[False]*5)
 
-        return procgame.game.SwitchContinue    
+        return procgame.game.SwitchContinue
 
     def sw_target1_active(self, sw):
-        return self.leftTargetHitHelper(0)        
+        return self.leftTargetHitHelper(0)
 
     def sw_target2_active(self, sw):
-        return self.leftTargetHitHelper(1)        
+        return self.leftTargetHitHelper(1)
 
     def sw_target3_active(self, sw):
-        return self.leftTargetHitHelper(2)        
+        return self.leftTargetHitHelper(2)
 
     def sw_target4_active(self, sw):
-        return self.leftTargetHitHelper(3)        
+        return self.leftTargetHitHelper(3)
 
     def sw_target5_active(self, sw):
-        return self.leftTargetHitHelper(4)        
+        return self.leftTargetHitHelper(4)
 
     def sw_slingL_active(self, sw):
         self.game.score(100)
@@ -370,7 +370,7 @@ class BaseGameMode(procgame.game.AdvancedMode):
         self.game.displayText("STAY OUT!")
         self.game.coils.dropTarget.pulse()
         self.game.lamps.dropTarget.pulse(20)
-        return procgame.game.SwitchStop  
+        return procgame.game.SwitchStop
 
     def sw_gripTrigger_active(self, sw):
         if self.game.switches.shooter.is_active():

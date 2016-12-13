@@ -1,7 +1,7 @@
 ScoreLayout:
       Fonts:
             bottom_info:                  # the bottom info Credits/Ball Num
-                  Font: score_sub         # value corresponds to a font key in asset_list.yaml
+                  Font: overwatch_font         # value corresponds to a font key in asset_list.yaml
                   FontStyle: blueish      # FontStyles are also in asset_list and OPTIONAL
 
             single_player:                # Fonts/Styles for single player play
@@ -14,19 +14,19 @@ ScoreLayout:
 
             multiplayer:                 # Fonts/Styles for multiplayer play
                   active:                 # style for the active player
-                        7_digits: 
+                        7_digits:
                               Font: score_activeL
-                        8_digits: 
+                        8_digits:
                               Font: score_activeM
-                        9plus: 
+                        9plus:
                               Font: score_activeS
 
                   inactive:               # style for the inactive player(s)
-                        7_digits: 
+                        7_digits:
                               Font: score_inactive
-                        8_digits: 
+                        8_digits:
                               Font: score_inactive
-                        9plus: 
+                        9plus:
                               Font: score_inactive
       # Background: flames
       ScoreInterior: flames

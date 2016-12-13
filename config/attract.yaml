@@ -3,7 +3,7 @@
 Sequence:
     - LastScores:
         Font: large
-        FontStyle: 
+        FontStyle:
             interior_color: [130,230,130]
             line_width: 1
             line_color: [60,60,60]
@@ -13,10 +13,10 @@ Sequence:
         duration: 2.0
     - Combo:
         Text:
-            - "MOcean"
-            - ""
-            - "Presents"
-        # Font: med  -- these are optional for 
+            - "Jeff Thor"
+            - "Mazlin Higbee"
+            - "Present"
+        Font: overwatch_font
         # FontStyle: weird  -- Combo layers
         Animation: dark_chrome
         lampshow: attract_show_2
@@ -27,33 +27,33 @@ Sequence:
         y: height
         v_justify: bottom
         h_justify: right
-        Text: "Look down here"
-        Font: med
+        Text: "ThorLin Games"
+        Font: overwatch_font
         duration: 1.0
     - text_layer:
         x: 0
         y: 0
         v_justify: top
         h_justify: left
-        Text: "Look up here"        
-        Font: med
+        Text: "ThorLin Games"
+        Font: overwatch_font
         duration: 1.0
     - text_layer:
         x: .50   # 50% of the display width
         y: -5    # 5 "dots" up from the bottom
         h_justify: center
         v_justify: bottom
-        Text: "Look over here"        
-        Font: med
+        Text: "ThorLin Games"
+        Font: overwatch_font
         duration: 1.0
     - panning_layer:
         width: 500
-        height: 500        
+        height: 500
         origin_x: 0
-        origin_y: -130 
+        origin_y: -130
         scroll_x: 0
         scroll_y: 2
-        frames_per_movement: 2 
+        frames_per_movement: 2
         bounce: False
         contents:
             group_layer:
@@ -64,13 +64,13 @@ Sequence:
                         name: dark_chrome
                     - markup_layer:
                         width: 450
-                        Bold: 
+                        Bold:
                             Font: med
                             FontStyle: blueish
-                        Normal: 
+                        Normal:
                             Font: small
                             FontStyle: blueish
-                        Message: 
+                        Message:
                             - "#Special Thanks to:#"
                             - "#Gerry Stellenberg"
                             - "Adam Preble#"
@@ -78,9 +78,9 @@ Sequence:
                             - "[Scott Danesi]"
                             - "[(Deadpin) Matt"
                             - "Mark (Snux)]"
-        duration: 4.0        
-## Random Text #############################################################    
-## This section will display a Combo style text where the contents will 
+        duration: 4.0
+## Random Text #############################################################
+## This section will display a Combo style text where the contents will
 ##   be selected at random line from Text list
 ## You can use header text of opt out of it by supplying "none" as the header.
 ## Feature enhancement for the awesome @scottdanesi based on his code
@@ -90,15 +90,10 @@ Sequence:
         TextOptions:
             - Text:
                 - ""
-                - do not drink
-                - gasoline
+                - Watch out for Roadhog
+                - He's got the hooks
                 - ""
-            - Text:
-                - ""
-                - ""
-                - do not tip
-                - vending machines
-                - ""
+
             - Text: ["", "", "do not swim in", "the ocean", ""]
             - Text: don't panic
             - Text: [ "", "do not enrich" ,"uranium without","a permit"]
@@ -117,7 +112,7 @@ Sequence:
         duration: 4.0
     - Animation:
         Name: t800-war
-        sound: target_bank                
+        sound: target_bank
     - Combo:
         Text:
             - "Terminator"
