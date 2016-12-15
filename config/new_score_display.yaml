@@ -1,9 +1,9 @@
-ScoreLayout:       
+ScoreLayout:
     SinglePlayer:
         Score:
             visible: True # don't make this invisible...
             font: score_1p
-            font_style: 
+            font_style:
                 interior_color: [255, 255, 128]
                 line_width: 1
                 line_color: [128, 128, 0]
@@ -12,11 +12,11 @@ ScoreLayout:
             x:  0.5
             y: 0.5
             Background: flames
-        CreditIndicator:                  
+        CreditIndicator:
             visible: True # toggle this to False to make this invisible
             format: FREE PLAY
             font: score_sub
-            font_style: 
+            font_style:
                 interior_color: [192, 192, 96]
                 line_width: 1
                 line_color: [128, 128, 0]
@@ -28,7 +28,7 @@ ScoreLayout:
             visible: True # toggle this to False to make this invisible
             format: BALL _
             font: score_sub
-            font_style: 
+            font_style:
                 interior_color: [192, 192, 96]
                 line_width: 1
                 line_color: [128, 128, 0]
@@ -36,24 +36,24 @@ ScoreLayout:
             v_justify: bottom
             x:  0.95
             y: 1.0
-        Background: 
-            Animation: 
-                Name: dark_chrome
+        Background:
+            Animation:
+                Name: overwatch_bg
         Foreground:
-            animation_layer: 
+            animation_layer:
                 name: t800-war
                 x: 0.5
                 y: 0.5
     MultiPlayer:
         Background: # if omitted here, Singleplayer value is used.  Set to None to disable
-            Animation: 
+            Animation:
                 Name: chrome
         Foreground: None # set to None to disable
         # CreditIndicator: # if you define these here too, they replace the others
         # BallNumber:   # as above
         ActivePlayer:
             font: score_1p
-            font_style: 
+            font_style:
                 interior_color: [255, 255, 128]
                 line_width: 1
                 line_color: [128, 128, 0]
@@ -64,7 +64,7 @@ ScoreLayout:
             y: 0.5
         PlayerOne:
             font: score_sub
-            font_style: 
+            font_style:
                 interior_color: [255, 255, 128]
                 line_width: 1
                 line_color: [128, 128, 0]
@@ -74,7 +74,7 @@ ScoreLayout:
             y:  1
         PlayerTwo:
             font: score_sub
-            font_style: 
+            font_style:
                 interior_color: [255, 255, 128]
                 line_width: 1
                 line_color: [128, 128, 0]
@@ -84,17 +84,17 @@ ScoreLayout:
             y: 1
         PlayerThree:
             font: score_sub
-            font_style: 
+            font_style:
                 interior_color: [255, 255, 128]
                 line_width: 1
                 line_color: [128, 128, 0]
             h_justify: left
             v_justify: bottom
             x: 1
-            y: 0.75 
+            y: 0.75
         PlayerFour:
             font: score_sub
-            font_style: 
+            font_style:
                 interior_color: [255, 255, 128]
                 line_width: 1
                 line_color: [128, 128, 0]

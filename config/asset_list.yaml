@@ -1,5 +1,5 @@
 UserInterface:
-  splash_screen: 'loading.png'
+  splash_screen: 'overwatch.jpg'
   progress_bar:
       x_center: 0.5
       y_center: 0.25
@@ -47,6 +47,8 @@ Animations:
   file: 'light_texture.png'
 - key: 'dark_chrome'
   file: 'texture.png'
+- key: 'overwatch_bg'
+  file: 'overwatch.jpg'
 - key: 'status_bg'
   file: light_texture.png
 Fonts:

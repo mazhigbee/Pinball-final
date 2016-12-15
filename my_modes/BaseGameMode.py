@@ -322,29 +322,31 @@ class BaseGameMode(procgame.game.AdvancedMode):
             (self.game.getPlayerState('standupSwitchC') == True) and
             (self.game.getPlayerState('standupSwitchR') == True)): # all three are True
                 self.game.displayText("All Targets Hit")
-                self.game.score(1000)
                 self.game.sound.play('target_bank')
-                self.game.lamps.standupMidL.disable()
-                self.game.lamps.standupMidC.disable()
-                self.game.lamps.standupMidR.disable()
-                self.game.setPlayerState('standupSwitchL', False)
-                self.game.setPlayerState('standupSwitchC', False)
-                self.game.setPlayerState('standupSwitchR', False)
+                self.game.modes.add(self.game.chase_loop_mode)
+
+
+
+                # self.game.lamps.standupMidL.disable()
+                # self.game.lamps.standupMidC.disable()
+                # self.game.lamps.standupMidR.disable()
+                #
+                # self.game.setPlayerState('standupSwitchL', False)
+                # self.game.setPlayerState('standupSwitchC', False)
+                # self.game.setPlayerState('standupSwitchR', False)
 
         #a check for invincibilty mode
         if((self.game.getPlayerState('standupRT') == True) and
             (self.game.getPlayerState('standupRM') == True) and
             (self.game.getPlayerState('standupRB') == True)):
-                self.game.displayText("invincibility mode activated")
-                self.game.score(5000)
                 #self.game.sound play zen line
-                self.game.lamps.standupRightT.disable()
-                self.game.lamps.standupRightM.disable()
-                self.game.lamps.standupRightB.disable()
+                self.game.modes.add(self.game.invincibility_mode)
                 self.game.setPlayerState('standupRT', False)
                 self.game.setPlayerState('standupRM', False)
                 self.game.setPlayerState('standupRB', False)
-                self.game.modes.add(self.game.invincibility_mode)
+
+
+
         else:
             self.game.sound.play('target')
 

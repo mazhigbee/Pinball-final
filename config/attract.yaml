@@ -94,17 +94,17 @@ Sequence:
                 - He's got the hooks
                 - ""
 
-            - Text: ["", "", "do not swim in", "the ocean", ""]
-            - Text: don't panic
-            - Text: [ "", "do not enrich" ,"uranium without","a permit"]
-            - Text: [ "", "", "keep away from", "high voltage", ""]
-            - Text: "avoid green meat"
-            - Text: [ "", "", "do not lick,festering wounds",""]
-            - Text: "own a gas mask"
-            - Text: [ "", "", "do not pick","up hitchhikers",""]
-            - Text: [ "", "", "build a fallout","shelter", ""]
-            - Text: [ "", "secure your", "gas mask before", "assisting others"]
-            - Text: [ "", "do not stare", "at overheating", "reactors"]
+            - Text: ["", "", "Cheers love!", "the cavalry's here", ""]
+            - Text: turret ahead
+            - Text: [ "", "Imagination is" ,"the essence","of discovery"]
+            - Text: [ "", "", "the power ", "of science", ""]
+            - Text: "natural selection"
+            - Text: [ "", "", "Pass itno the iris",""]
+            - Text: "Oh, lets break it down!"
+            - Text: [ "", "Heros Never Die",""]
+            - Text: [ "", "", "Times Up","Bombs Away!", ""]
+            - Text: [ "", "I've got you", "in my", "sights"]
+            - Text: [ "", "Justice Rains", "from above", ""]
         Font: small
         Animation: dark_chrome
         FontStyle: weird

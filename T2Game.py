@@ -16,7 +16,7 @@ from procgame.game.skeletongame import run_proc_game
 # these are modes that you define, and probably store in
 # a my_modes folder under this one.... add to end of From my_modes import...REMEBER TO ADD NEWINSTANCE LINE 50
 import my_modes
-from my_modes import BaseGameMode, ExBlankMode, SkillshotMode, invincibilityMode
+from my_modes import BaseGameMode, ExBlankMode, SkillshotMode, invincibilityMode, gunMode, ChaseLoopMode
 
 # set up a few more things before we get started
 # the logger's configuration and format
@@ -49,6 +49,8 @@ class T2Game(SkeletonGame):
         self.blank_mode = ExBlankMode(game=self)
         self.skillshot_mode = SkillshotMode(game=self)
         self.invincibility_mode = invincibilityMode(game=self)
+        self.gun_mode = gunMode(game=self)
+        self.chase_loop_mode = ChaseLoopMode(game=self)
 
         # this is also a reasonable place to setup lists of lamps, switches, drivers, etc.
         # that might be useful in more than one mode.
