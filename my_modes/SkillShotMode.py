@@ -60,7 +60,7 @@ class SkillshotMode(procgame.game.AdvancedMode):
 
   def checktarget(self, target_num):
     if(self.number == target_num):
-      self.game.displayText("Target H")
+      self.game.displayText("HOOKED")
       self.game.score(1000000)
       self.game.sound.play('hanzo_stronger')
     else:

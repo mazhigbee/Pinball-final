@@ -1,9 +1,9 @@
 import procgame.game
 from procgame.game import AdvancedMode
-#TODO
+#TODOPO
 class gunMode(procgame.game.AdvancedMode):
   """
-  left chase loop
+  gunMode
   """
 
   def __init__(self, game):
@@ -12,36 +12,36 @@ class gunMode(procgame.game.AdvancedMode):
     # stuff that gets done EXACTLY once.
     # happens when the "parent" Game creates this mode
      pass
-     def mode_started(self):
-         self.counter = 0
+  def mode_started(self):
+     self.number = 0
 
-         pass
+  def runMode(self):
+      self.game.lamps.checkpointL.schedule(0x00f00ff)
+      self.game.lamps.passcodeL.schedule(0xf0f0f0f0)
+      self.game.lamps.silentAlarmL.schedule(0xf00f0f)
+      self.game.lamps.vaultKeyL.schedule(0x0ff0ff0)
+      self.game.lamps.cpuLitL.schedule(0x0f00f0f0)
 
 
-  def gunMode(self):
-      #TODO enable drop target and allow user to shooter
-      #enable invincibilityMode
-      #if gun hits give superjackpot of 50mil
-      pass
-  def sw_rampLeftMade_active(self):
-      if(self.counter == 0):
-         self.lamps.checkpointL.enable()
-         self.counter = self.counter + 1
+  def sw_rampLeftMade_active(self,sw):
+      if(self.number == 0):
+         self.game.lamps.checkpointL.enable()
+         self.number = self.number + 1
          return
-      if(self.counter == 1):
-         self.lamps.passcodeL.enable()
-         self.counter = self.counter + 1
+      if(self.number == 1):
+         self.game.lamps.passcodeL.enable()
+         self.number = self.number + 1
          return
-      if(self.counter == 2):
-         self.lamps.silentAlarmL.enable()
-         self.counter = self.counter + 1
+      if(self.number == 2):
+         self.game.lamps.silentAlarmL.enable()
+         self.number = self.number + 1
          return
-      if(self.counter == 3):
-         self.lamps.vaultKeyL.enable()
-         self.counter = self.counter + 1
+      if(self.number == 3):
+         self.game.lamps.vaultKeyL.enable()
+         self.number = self.number + 1
          return
-      if(self.counter == 4):
-         self.lamps.cpuLitL.enable()
+      if(self.number == 4):
+         self.game.lamps.cpuLitL.enable()
          #TODO: activate gun
-         self.counter = 0
-         gunMode()
+         self.number = 0
+         runMode();

@@ -300,16 +300,19 @@ class BaseGameMode(procgame.game.AdvancedMode):
         self.checkAllSwitches()
         return procgame.game.SwitchContinue
     def sw_standupRightT_active(self,sw):
+        self.game.sound.play('winston_barr')
         self.game.setPlayerState('standupRT', True)
         self.game.lamps.standupRightT.enable()
         self.checkAllSwitches()
         return procgame.game.SwitchContinue
     def sw_standupRightM_active(self,sw):
+        self.game.sound.play('winston_barr')
         self.game.setPlayerState('standupRM', True)
         self.game.lamps.standupRightM.enable()
         self.checkAllSwitches()
         return procgame.game.SwitchContinue
     def sw_standupRightB_active(self,sw):
+        self.game.sound.play('winston_barr')
         self.game.setPlayerState('standupRB', True)
         self.game.lamps.standupRightB.enable()
         self.checkAllSwitches()

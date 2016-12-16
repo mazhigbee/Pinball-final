@@ -39,3 +39,4 @@ class ChaseLoopMode(procgame.game.AdvancedMode):
 		self.game.score(self.scoreIncrease)
 		self.scoreIncrease *= 2
 		return procgame.game.SwitchStop
+

@@ -2,7 +2,7 @@ ScoreLayout:
     SinglePlayer:
         Score:
             visible: True # don't make this invisible...
-            font: score_1p
+            font: overwatch_font
             font_style:
                 interior_color: [255, 255, 128]
                 line_width: 1
@@ -13,7 +13,7 @@ ScoreLayout:
             y: 0.5
             Background: flames
         CreditIndicator:
-            visible: True # toggle this to False to make this invisible
+            visible: False # toggle this to False to make this invisible
             format: FREE PLAY
             font: score_sub
             font_style:
