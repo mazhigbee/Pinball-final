@@ -190,10 +190,10 @@ class BaseGameMode(procgame.game.AdvancedMode):
         self.game.log("base game mode trough changed notification ('ball_ending - again=%s, last=%s')" % (shoot_again,last_ball))
 
         # stop any music as appropriate
-        # self.game.sound.fadeout_music()
-        self.game.sound.play('ball_drain')
-        self.game.sound.play_music('sonic')
-        self.game.displayText('BGM Ball Ended!')
+        self.game.sound.fadeout_music()
+        self.game.sound.play('outhole_exit')
+
+        self.game.displayText('Ball Ended!')
         return 2.0
 
     def evt_game_ending(self):
@@ -222,6 +222,7 @@ class BaseGameMode(procgame.game.AdvancedMode):
     """
     def sw_outhole_active_for_200ms(self,sw):
             self.game.coils.outhole.pulse()
+
 
     def sw_ballPopper_active_for_200ms(self, sw):
         # ballPopper is the vertical up kicker (VUK) in the Skull.
@@ -279,8 +280,8 @@ class BaseGameMode(procgame.game.AdvancedMode):
       	elif(self.leftRampCounter == 4):
          	self.game.lamps.cpuLitL.enable()
          	#TODO: activate gun
-         	if(self.game.gun_mode not in self.game.modes):
-         		self.game.modes.add(self.game.gun_mode)
+         	if(self.game.shooter_mode not in self.game.modes):
+         		self.game.modes.add(self.game.shooter_mode)
         return procgame.game.SwitchStop
 
     def kickback_disabler(self):

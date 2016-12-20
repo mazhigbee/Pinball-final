@@ -51,6 +51,8 @@ Animations:
   file: 'overwatch.jpg'
 - key: 'status_bg'
   file: light_texture.png
+- key: 'invin_pic'
+  file: 'ZenSpray.png'
 Fonts:
   FontStyles:
   - key: status_font_style
@@ -59,14 +61,14 @@ Fonts:
     line_color: [20,20,20]
   - key: weird
     interior_color:
-      - 0
-      - 0
-      - 128
-    line_width: 1
-    line_color:
+      - 255
       - 255
       - 0
-      - 128
+    line_width: 1
+    line_color:
+      - 0
+      - 0
+      - 0
   - key: blueish
     interior_color:
       - 255
@@ -217,6 +219,8 @@ Audio:
       file: 'invin_mode.ogg'
     - key: 'winston_barr'
       file: 'barrier_up.ogg'
+    - key: 'outhole_exit'
+      file: 'bastionbwee.ogg'
 
   Voice:
     - key: 'ss_successV'

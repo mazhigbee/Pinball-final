@@ -23,7 +23,7 @@ class invincibilityMode(procgame.game.AdvancedMode):
         self.game.sound.play_music('invin_active')
         self.delay(name = "hurry", delay = 10,handler = self.hurry)
         self.delay(name = "next_target",delay = 15,handler=self.timerCall)
-        self.game.enable_ball_saver(15,5,True,True)
+        self.game.enable_ball_saver(5,15,True,True)
         pass
     def hurry(self):
         self.game.lamps.standupRightT.schedule(0xf00f00f0)
