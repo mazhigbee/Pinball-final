@@ -57,6 +57,9 @@ class BaseGameMode(procgame.game.AdvancedMode):
             the player argument is the newly created player who has just been added
         """
         player.setState('multiplier', 0)
+        player.setState('arrowL', False)
+        player.setState('arrowC', False)
+        player.setState('arrowR', False)
         player.setState('standupSwitchL', False)
         player.setState('standupSwitchC', False)
         player.setState('standupSwitchR', False)
@@ -109,6 +112,7 @@ class BaseGameMode(procgame.game.AdvancedMode):
         depending on how the Game itself adds/removes it.  B/C this is
         an advancedMode, we know when it will be added/removed.
         """
+        self.leftRampCounter = 0
         self.game.coils.dropTarget.pulse()
 
     def mode_stopped(self):
@@ -256,6 +260,27 @@ class BaseGameMode(procgame.game.AdvancedMode):
     def sw_rampLeftMade_active(self, sw):
         self.game.score(500)
         # self.game.displayText("Left Ramp Made")
+        if(self.leftRampCounter == 0):
+        	self.game.lamps.checkpointL.enable()
+        	self.leftRampCounter = self.leftRampCounter + 1
+        	return
+      	elif(self.leftRampCounter == 1):
+        	self.game.lamps.passcodeL.enable()
+        	self.leftRampCounter = self.leftRampCounter + 1
+        	return
+      	elif(self.leftRampCounter == 2):
+         	self.game.lamps.silentAlarmL.enable()
+         	self.leftRampCounter = self.leftRampCounter + 1
+         	return
+      	elif(self.leftRampCounter == 3):
+         	self.game.lamps.vaultKeyL.enable()
+         	self.leftRampCounter = self.leftRampCounter + 1
+         	return
+      	elif(self.leftRampCounter == 4):
+         	self.game.lamps.cpuLitL.enable()
+         	#TODO: activate gun
+         	if(self.game.gun_mode not in self.game.modes):
+         		self.game.modes.add(self.game.gun_mode)
         return procgame.game.SwitchStop
 
     def kickback_disabler(self):
@@ -285,48 +310,49 @@ class BaseGameMode(procgame.game.AdvancedMode):
     def sw_standupMidL_active(self, sw):
         self.game.setPlayerState('standupSwitchL',True)
         self.game.lamps.standupMidL.enable()
-        self.checkAllSwitches()
+        self.checkMidSwitches()
         return procgame.game.SwitchContinue
 
     def sw_standupMidC_active(self, sw):
         self.game.setPlayerState('standupSwitchC',True)
         self.game.lamps.standupMidC.enable()
-        self.checkAllSwitches()
+        self.checkMidSwitches()
         return procgame.game.SwitchContinue
-
     def sw_standupMidR_active(self, sw):
         self.game.setPlayerState('standupSwitchR',True)
         self.game.lamps.standupMidR.enable()
-        self.checkAllSwitches()
+        self.checkMidSwitches()
         return procgame.game.SwitchContinue
+
     def sw_standupRightT_active(self,sw):
         self.game.sound.play('winston_barr')
         self.game.setPlayerState('standupRT', True)
         self.game.lamps.standupRightT.enable()
-        self.checkAllSwitches()
+        self.checkRightSwitches()
         return procgame.game.SwitchContinue
     def sw_standupRightM_active(self,sw):
         self.game.sound.play('winston_barr')
         self.game.setPlayerState('standupRM', True)
         self.game.lamps.standupRightM.enable()
-        self.checkAllSwitches()
+        self.checkRightSwitches()
         return procgame.game.SwitchContinue
     def sw_standupRightB_active(self,sw):
         self.game.sound.play('winston_barr')
         self.game.setPlayerState('standupRB', True)
         self.game.lamps.standupRightB.enable()
-        self.checkAllSwitches()
+        self.checkRightSwitches()
         return procgame.game.SwitchContinue
 
-    def checkAllSwitches(self):
+    def checkMidSwitches(self):
         """ called by each of the standupMid? handlers to
             determine if the bank has been completed """
         if((self.game.getPlayerState('standupSwitchL') == True) and
             (self.game.getPlayerState('standupSwitchC') == True) and
             (self.game.getPlayerState('standupSwitchR') == True)): # all three are True
-                self.game.displayText("All Targets Hit")
-                self.game.sound.play('target_bank')
-                self.game.modes.add(self.game.chase_loop_mode)
+                if(self.game.chase_loop_mode not in self.game.modes):
+                	self.game.displayText("All Targets Hit")
+                	self.game.sound.play('target_bank')
+                	self.game.modes.add(self.game.chase_loop_mode)
 
 
 
@@ -339,21 +365,52 @@ class BaseGameMode(procgame.game.AdvancedMode):
                 # self.game.setPlayerState('standupSwitchR', False)
 
         #a check for invincibilty mode
-        if((self.game.getPlayerState('standupRT') == True) and
-            (self.game.getPlayerState('standupRM') == True) and
-            (self.game.getPlayerState('standupRB') == True)):
-                #self.game.sound play zen line
-                self.game.modes.add(self.game.invincibility_mode)
-                self.game.setPlayerState('standupRT', False)
-                self.game.setPlayerState('standupRM', False)
-                self.game.setPlayerState('standupRB', False)
-
-
-
         else:
             self.game.sound.play('target')
 
+    def sw_laneL_active(self, sw):
+    	self.game.setPlayerState('arrowL', True)
+    	self.game.lamps.laneL.enable()
+    	self.checkLanes()
+    	return procgame.game.SwitchContinue
 
+    def sw_laneC_active(self, sw):
+    	self.game.setPlayerState('arrowC', True)
+    	self.game.lamps.laneC.enable()
+    	self.checkLanes()
+    	return procgame.game.SwitchContinue
+
+    def sw_laneR_active(self, sw):
+    	self.game.setPlayerState('arrowR', True)
+    	self.game.lamps.laneR.enable()
+    	self.checkLanes()
+    	return procgame.game.SwitchContinue
+
+    def checkLanes(self):
+    	if((self.game.getPlayerState('arrowL') == True) and
+            (self.game.getPlayerState('arrowC') == True) and
+            (self.game.getPlayerState('arrowR') == True)): # all three are True
+                self.game.displayText("All lanes lit")
+                self.game.score(100000)
+                self.game.sound.play('target_bank')
+                self.game.lamps.laneL.disable()
+                self.game.lamps.laneC.disable()
+                self.game.lamps.laneR.disable()
+                self.game.setPlayerState('arrowL', False)
+                self.game.setPlayerState('arrowC', False)
+                self.game.setPlayerState('arrowR', False)
+        else:
+                self.game.sound.play('target')
+
+    def checkRightSwitches(self):
+    	if((self.game.getPlayerState('standupRT') == True) and
+            (self.game.getPlayerState('standupRM') == True) and
+            (self.game.getPlayerState('standupRB') == True)):
+                #self.game.sound play zen line
+                if(self.game.invincibility_mode not in self.game.modes):
+                	self.game.modes.add(self.game.invincibility_mode)
+        else:
+            self.game.sound.play('target')
 
     """ An alternate way of handling a bank of related switches
         using lists (for switch states and lamps) we can have

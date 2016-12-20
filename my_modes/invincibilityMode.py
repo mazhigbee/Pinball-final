@@ -31,7 +31,9 @@ class invincibilityMode(procgame.game.AdvancedMode):
         self.game.lamps.standupRightB.schedule(0x00f00f00)
 
     def timerCall(self):
-
+    	self.game.setPlayerState('standupRT', False)
+        self.game.setPlayerState('standupRM', False)
+        self.game.setPlayerState('standupRB', False)
         self.game.lamps.standupRightT.disable()
         self.game.lamps.standupRightM.disable()
         self.game.lamps.standupRightB.disable()
