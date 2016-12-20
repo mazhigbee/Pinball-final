@@ -217,6 +217,7 @@ PRCoils:
         ballsearch: True
     plunger:
         number: C09
+        tags: autoPlunger
     lockTop:
         number: C10
         ballsearch: True

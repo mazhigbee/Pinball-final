@@ -86,7 +86,7 @@ class BaseGameMode(procgame.game.AdvancedMode):
         self.game.sound.fadeout_music()
         self.game.sound.play_music('overwatch-main')
 
-    def shooter_inactive_for_250ms(self):
+    def sw_shooter_inactive_for_250ms(self,sw):
         # ball saver syntax has changed.  We no longer need to supply a callback
         # method instead, evt_ball_saved() will be called if a ball is saved.
         # to enable it, use this
@@ -114,6 +114,10 @@ class BaseGameMode(procgame.game.AdvancedMode):
         """
         self.leftRampCounter = 0
         self.game.coils.dropTarget.pulse()
+        self.game.lamps.topInsertGI.enable()
+        self.game.lamps.playfieldLeftGI.enable()
+        self.game.lamps.playfieldRightGI.enable()
+        self.game.lamps.bottomInsertGI.enable()
 
     def mode_stopped(self):
         """
@@ -121,7 +125,10 @@ class BaseGameMode(procgame.game.AdvancedMode):
         from the mode queue; this might happen multiple times per game,
         depending on how the Game itself adds/removes it
         """
-        pass
+        self.game.lamps.topInsertGI.disable()
+        self.game.lamps.playfieldLeftGI.disable()
+        self.game.lamps.playfieldRightGI.disable()
+        self.game.lamps.bottomInsertGI.disable()
 
     def update_lamps(self):
         """
