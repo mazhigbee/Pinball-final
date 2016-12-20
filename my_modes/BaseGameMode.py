@@ -271,6 +271,7 @@ class BaseGameMode(procgame.game.AdvancedMode):
         if(self.leftRampCounter == 0):
         	self.game.lamps.checkpointL.enable()
         	self.leftRampCounter = self.leftRampCounter + 1
+
         	return
       	elif(self.leftRampCounter == 1):
         	self.game.lamps.passcodeL.enable()
@@ -472,8 +473,8 @@ class BaseGameMode(procgame.game.AdvancedMode):
         return procgame.game.SwitchContinue
 
     def sw_dropTarget_active(self,sw):
-        self.game.displayText("STAY OUT!")
-        self.game.coils.dropTarget.pulse()
+        #self.game.displayText("STAY OUT!")
+        #self.game.coils.dropTarget.pulse()
         self.game.lamps.dropTarget.pulse(20)
         return procgame.game.SwitchStop
 

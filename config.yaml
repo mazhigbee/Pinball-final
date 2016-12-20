@@ -18,13 +18,13 @@ default_modes:  # these are the default provided modes by SkeletonGame; turn the
     osc_input: True
     service_mode: True
     ball_search: True   # indicates the game should use yaml tags for "smart" ball search
-pinproc_class: procgame.fakepinproc.FakePinPROC # comment out this line when using a real P-ROC.
+#pinproc_class: procgame.fakepinproc.FakePinPROC # comment out this line when using a real P-ROC.
 
 # all of this is for the hdDMD
 use_virtual_dmd_only: True          # don't try to talk to the real DMD (seriously, don't)
 dmd_grid_path: ./assets/dmd/        # where to find the dmdgrid32x32.png file
-dmd_dots_w: 288                     # the display width in virtual dots
-dmd_dots_h: 151                     # the display height in virtual donts
+dmd_dots_w: 720                    # the display width in virtual dots
+dmd_dots_h: 480                # the display height in virtual donts
 dmd_dot_filter: True                # enable to virtual dot effect; false disables dot separation
 dmd_fullscreen: False               # Full-screen mode scales the contents to fit the full display; may not look right
 desktop_dmd_scale: 2               # the dmd scale is the multiplier per dot.  At 5 each dot is 5x5 pixels

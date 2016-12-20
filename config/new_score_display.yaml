@@ -52,9 +52,9 @@ ScoreLayout:
         # CreditIndicator: # if you define these here too, they replace the others
         # BallNumber:   # as above
         ActivePlayer:
-            font: score_1p
+            font: overwatch_font
             font_style:
-                interior_color: [255, 255, 128]
+                interior_color: [255, 255, 0]
                 line_width: 1
                 line_color: [128, 128, 0]
             in_place_if_active: False

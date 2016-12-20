@@ -20,9 +20,11 @@ class shooterMode(procgame.game.AdvancedMode):
 		self.game.lamps.vaultKeyL.schedule(0x0ff0ff0)
 		self.game.lamps.cpuLitL.schedule(0x0f00f0f0)
 		self.game.displayText("LOAD THE GUN")
+		self.game.coils.knockDown.pulse()
 		# self.delay(name = "hurry", delay = 10,handler = self.hurry)
   #       self.delay(name = "next_target",delay = 15,handler=self.timerCall)
 		#drop target
-
+	def mode_ended(self):
+		self.game.coils.dropTarget.pulse()
 	def times_up(self):
 		self.leftRampCounter = 0
