@@ -20,9 +20,9 @@ class invincibilityMode(procgame.game.AdvancedMode):
     def mode_started(self):
         self.game.sound.play('invin_sfx')
         self.game.displayText("Invincibility Mode Active!")
-        self.game.sound.play_music('invin_active')
-        self.delay(name = "hurry", delay = 10,handler = self.hurry)
-        self.delay(name = "next_target",delay = 15,handler=self.timerCall)
+        self.game.sound.play_music('anubis', -1)
+        self.delay(name = "hurry", delay = 25,handler = self.hurry)
+        self.delay(name = "next_target",delay = 30,handler=self.timerCall)
         self.game.enable_ball_saver(1,15,True,True)
         pass
     def hurry(self):
@@ -37,7 +37,7 @@ class invincibilityMode(procgame.game.AdvancedMode):
         self.game.lamps.standupRightT.disable()
         self.game.lamps.standupRightM.disable()
         self.game.lamps.standupRightB.disable()
-        self.game.sound.play_music('overwatch-main')
+        self.game.sound.play_music('overwatch_main', -1)
         self.game.displayText("invincibilityMode over")
         self.game.disable_ball_saver()
         self.game.modes.remove(self.game.invincibility_mode)

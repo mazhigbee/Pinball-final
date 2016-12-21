@@ -28,17 +28,21 @@ class shooterMode(procgame.game.AdvancedMode):
 		self.cancel_delayed("next_target")
 		self.delay(name="hurry",delay=18,handler=self.hurry)
 		self.delay(name="times_up", delay=25,handler = self.times_up)
-
 		# self.delay(name = "hurry", delay = 10,handler = self.hurry)
   #       self.delay(name = "next_target",delay = 15,handler=self.timerCall)
 		#drop target
 	def mode_stopped(self):
-		self.game.coils.dropTarget.pulse()
+		#self.game.coils.dropTarget.pulse()
 		self.game.lamps.checkpointL.disable()
 		self.game.lamps.passcodeL.disable()
 		self.game.lamps.silentAlarmL.disable()
 		self.game.lamps.vaultKeyL.disable()
 		self.game.lamps.cpuLitL.disable()
+		self.game.lamps.target1.disable()
+		self.game.lamps.target2.disable()
+		self.game.lamps.target3.disable()
+		self.game.lamps.target4.disable()
+		self.game.lamps.target5.disable()
 		self.leftRampCounter = 0
 		self.game.sound.fadeout_music()
 		self.game.sound.play_music('overwatch_main', -1)
@@ -49,11 +53,9 @@ class shooterMode(procgame.game.AdvancedMode):
 		self.game.lamps.silentAlarmL.schedule(0xf0f0f0f0)
 		self.game.lamps.vaultKeyL.schedule(0xf0f0f0f0)
 		self.game.lamps.cpuLitL.schedule(0xf0f0f0f0)
-
-
 	def times_up(self):
 		if(self.game.shooter_mode in self.game.modes):
-			self.game.remove(self)
+			self.game.modes.remove(self)
 
 	def next_target(self):
 		self.game.lamps["target%d" % self.number].disable()
@@ -65,7 +67,7 @@ class shooterMode(procgame.game.AdvancedMode):
 		#self.game.displayText("Hit target %d" % self.number)
 		# self.game.lamps.target3.schedule(0xf0f0f0)
 		self.game.lamps["target%d" % self.number].enable()
-		self.delay(name="next_target", delay=1, handler=self.next_target)
+		self.delay(name="next_target", delay=0.5, handler=self.next_target)
 
 
 	def checktarget(self, target_num):

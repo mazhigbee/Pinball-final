@@ -64,7 +64,7 @@ class BaseGameMode(procgame.game.AdvancedMode):
 		player.setState('standupSwitchC', False)
 		player.setState('standupSwitchR', False)
 		player.setState('idle_balls', 0)
-		player.setState('leftTargets', [False, False, False, False, False])
+		# player.setState('leftTargets', [False, False, False, False, False])
 		player.setState('kickbackEnabled', False)
 		player.setState('standupRT', False)
 		player.setState('standupRM', False)
@@ -84,7 +84,7 @@ class BaseGameMode(procgame.game.AdvancedMode):
 		# let's reset the timer when the shooter lane goes inactive.
 
 		self.game.sound.fadeout_music()
-		self.game.sound.play_music('overwatch_main')
+		self.game.sound.play_music('overwatch_intro', -1)
 
 	def sw_shooter_inactive_for_250ms(self,sw):
 		# ball saver syntax has changed.  We no longer need to supply a callback
@@ -113,7 +113,7 @@ class BaseGameMode(procgame.game.AdvancedMode):
 		an advancedMode, we know when it will be added/removed.
 		"""
 		self.leftRampCounter = 0
-		self.game.coils.dropTarget.pulse()
+		# self.game.coils.dropTarget.pulse()
 		self.game.lamps.topInsertGI.enable()
 		self.game.lamps.playfieldLeftGI.enable()
 		self.game.lamps.playfieldRightGI.enable()
@@ -199,7 +199,22 @@ class BaseGameMode(procgame.game.AdvancedMode):
 		# stop any music as appropriate
 		self.game.sound.fadeout_music()
 		self.game.sound.play('outhole_exit')
+
 		self.game.displayText('Ball Ended!')
+
+		self.game.lamps.standupMidL.disable()
+		self.game.lamps.standupMidC.disable()
+		self.game.lamps.standupMidR.disable()
+		self.game.lamps.standupRightT.disable()
+		self.game.lamps.standupRightM.disable()
+		self.game.lamps.standupRightB.disable()
+
+		self.game.setPlayerState('standupSwitchL',False)
+		self.game.setPlayerState('standUpSwitchC',False)
+		self.game.setPlayerState('standupSwitchR',False)
+		self.game.setPlayerState('standupRT', False)
+		self.game.setPlayerState('standupRM', False)
+		self.game.setPlayerState('standupRB',False)
 		return 2.0
 
 	def evt_game_ending(self):
@@ -255,8 +270,9 @@ class BaseGameMode(procgame.game.AdvancedMode):
 		# self.game.displayText("Right Ramp Enter")
 		return procgame.game.SwitchStop
 
-	def rampRightMade_active(self, sw):
-		self.game.score(500)
+	def sw_rampRightMade_active(self, sw):
+		self.game.score(50000)
+		self.game.sound.play('blink_one')
 		# self.game.displayText("Right Ramp Made")
 		return procgame.game.SwitchStop
 
@@ -265,7 +281,8 @@ class BaseGameMode(procgame.game.AdvancedMode):
 		return procgame.game.SwitchStop
 
 	def sw_rampLeftMade_active(self, sw):
-		self.game.score(500)
+		self.game.score(50000)
+		self.game.sound.play('blink_one')
 		# self.game.displayText("Left Ramp Made")
 		if(self.leftRampCounter == 0):
 			self.game.lamps.checkpointL.enable()
@@ -289,6 +306,7 @@ class BaseGameMode(procgame.game.AdvancedMode):
 			self.game.lamps.cpuLitL.enable()
 			#TODO: activate gun
 			if(self.game.shooter_mode not in self.game.modes):
+				self.game.sound.play('deadeye_ready')
 				self.game.modes.add(self.game.shooter_mode)
 		return procgame.game.SwitchStop
 
@@ -299,7 +317,6 @@ class BaseGameMode(procgame.game.AdvancedMode):
 	def sw_outlaneL_active(self, sw):
 		if(self.game.getPlayerState('kickbackEnabled')):
 			self.game.coils.kickback.pulse()
-			self.game.score(100)
 			self.game.displayText("Kickback!!!")
 			self.game.lamps.kickback.schedule(schedule=0xff00ff00)
 			self.delay(name='disable_kickback',
@@ -313,6 +330,15 @@ class BaseGameMode(procgame.game.AdvancedMode):
 	def sw_chaseLoopHigh_active(self, sw):
 		self.game.sound.play('tracer_whee')
 
+	def sw_jetL_active(self, sw):
+		self.game.sound.play('boop')
+
+	def sw_jetB_active(self, sw):
+		self.game.sound.play('boop')
+
+	def sw_jetR_active(self, sw):
+		self.game.sound.play('boop')
+
 	""" The following methods illustrate handling a bank of related
 		targets.  Notice that the logical state of the switch is
 		stored in the player's object.  Each of these functions
@@ -324,7 +350,6 @@ class BaseGameMode(procgame.game.AdvancedMode):
 		self.game.lamps.standupMidL.enable()
 		self.checkMidSwitches()
 		return procgame.game.SwitchContinue
-
 	def sw_standupMidC_active(self, sw):
 		self.game.setPlayerState('standupSwitchC',True)
 		self.game.lamps.standupMidC.enable()
@@ -337,19 +362,16 @@ class BaseGameMode(procgame.game.AdvancedMode):
 		return procgame.game.SwitchContinue
 
 	def sw_standupRightT_active(self,sw):
-		self.game.sound.play('winston_barr')
 		self.game.setPlayerState('standupRT', True)
 		self.game.lamps.standupRightT.enable()
 		self.checkRightSwitches()
 		return procgame.game.SwitchContinue
 	def sw_standupRightM_active(self,sw):
-		self.game.sound.play('winston_barr')
 		self.game.setPlayerState('standupRM', True)
 		self.game.lamps.standupRightM.enable()
 		self.checkRightSwitches()
 		return procgame.game.SwitchContinue
 	def sw_standupRightB_active(self,sw):
-		self.game.sound.play('winston_barr')
 		self.game.setPlayerState('standupRB', True)
 		self.game.lamps.standupRightB.enable()
 		self.checkRightSwitches()
@@ -363,7 +385,7 @@ class BaseGameMode(procgame.game.AdvancedMode):
 			(self.game.getPlayerState('standupSwitchR') == True)): # all three are True
 				if(self.game.chase_loop_mode not in self.game.modes):
 					self.game.displayText("All Targets Hit")
-					self.game.sound.play('target_bank')
+					self.game.sound.play('cheers_love')
 					self.game.modes.add(self.game.chase_loop_mode)
 
 
@@ -376,9 +398,8 @@ class BaseGameMode(procgame.game.AdvancedMode):
 				# self.game.setPlayerState('standupSwitchC', False)
 				# self.game.setPlayerState('standupSwitchR', False)
 
-		#a check for invincibilty mode
 		else:
-			self.game.sound.play('target')
+			self.game.sound.play('blink_one')
 
 	def sw_laneL_active(self, sw):
 		self.game.setPlayerState('arrowL', True)
@@ -403,8 +424,8 @@ class BaseGameMode(procgame.game.AdvancedMode):
 			(self.game.getPlayerState('arrowC') == True) and
 			(self.game.getPlayerState('arrowR') == True)): # all three are True
 				self.game.displayText("All lanes lit")
-				self.game.score(100000)
-				self.game.sound.play('target_bank')
+				self.game.score(1000000)
+				self.game.sound.play('dah_dah_whee')
 				self.game.lamps.laneL.disable()
 				self.game.lamps.laneC.disable()
 				self.game.lamps.laneR.disable()
@@ -412,7 +433,7 @@ class BaseGameMode(procgame.game.AdvancedMode):
 				self.game.setPlayerState('arrowC', False)
 				self.game.setPlayerState('arrowR', False)
 		else:
-				self.game.sound.play('target')
+				self.game.sound.play('zwee')
 
 	def checkRightSwitches(self):
 		if((self.game.getPlayerState('standupRT') == True) and
@@ -422,7 +443,7 @@ class BaseGameMode(procgame.game.AdvancedMode):
 				if(self.game.invincibility_mode not in self.game.modes):
 					self.game.modes.add(self.game.invincibility_mode)
 		else:
-			self.game.sound.play('target')
+			self.game.sound.play('winston_barr')
 
 	""" An alternate way of handling a bank of related switches
 		using lists (for switch states and lamps) we can have
@@ -434,19 +455,9 @@ class BaseGameMode(procgame.game.AdvancedMode):
 			the targetNums are actually 0..4 to coincide
 			with the indexes in the arrays, not their numbers
 		"""
-		vals = self.game.getPlayerState('leftTargets')
-		vals[targetNum] = True
-		if(False in vals):
-			self.game.setPlayerState('leftTargets',vals)
-			self.game.score(5000)
-			self.game.leftTargetLamps[targetNum].enable()
-			self.game.sound.play('target')
-		else:
-			self.game.setPlayerState('leftTargets',vals)
-			self.game.score(50000)
-			self.game.sound.play('target_bank')
-			self.game.displayText("LEFT TARGETS COMPLETE!", 'explosion')
-			self.game.setPlayerState('leftTargets',[False]*5)
+		self.game.score(5000)
+		self.game.leftTargetLamps[targetNum].pulse(20)
+		self.game.sound.play('blink_one')
 
 		return procgame.game.SwitchContinue
 
@@ -466,23 +477,21 @@ class BaseGameMode(procgame.game.AdvancedMode):
 		return self.leftTargetHitHelper(4)
 
 	def sw_slingL_active(self, sw):
-		self.game.score(100)
 		self.game.sound.play('bastion_sling')
 		return procgame.game.SwitchContinue
 
 	def sw_slingR_active(self, sw):
-		self.game.score(100)
 		self.game.sound.play('bastion_sling')
 		return procgame.game.SwitchContinue
 
 	def sw_dropTarget_active(self,sw):
 		self.game.displayText("STAY OUT!")
-		#self.game.coils.dropTarget.pulse()
+		# self.game.coils.dropTarget.pulse()
 		self.game.lamps.dropTarget.pulse(20)
 		return procgame.game.SwitchStop
 
 	def sw_gripTrigger_active(self, sw):
 		if self.game.switches.shooter.is_active():
 			self.game.coils.plunger.pulse()
-			self.game.sound.play('sling')
+			self.game.sound.play('boosters')
 		return procgame.game.SwitchStop

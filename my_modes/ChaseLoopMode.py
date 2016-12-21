@@ -10,6 +10,7 @@ class ChaseLoopMode(procgame.game.AdvancedMode):
 	def mode_started(self):
 		self.game.lamps.chaseValue.schedule(0xff00ff00)
 		self.scoreIncrease = 1000000
+		self.game.sound.play_music('dorado', -1)
 		self.delay(name="hurry", delay=15, handler=self.hurry_up)
 		self.delay(name="over", delay=20, handler=self.times_up)
 
@@ -23,6 +24,7 @@ class ChaseLoopMode(procgame.game.AdvancedMode):
 		self.game.lamps.chaseValue.schedule(0xF0F0F0F0)
 
 	def times_up(self):
+		self.game.sound.play_music('overwatch_main', -1)
 		self.game.modes.remove(self.game.chase_loop_mode)
 		self.game.lamps.standupMidL.disable()
 		self.game.lamps.standupMidC.disable()

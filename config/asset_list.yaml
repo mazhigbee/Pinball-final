@@ -162,7 +162,7 @@ Fonts:
     size: 12
   - key: 'overwatch_font'
     file: 'rexlia.ttf'
-    size: 18
+    size: 60
   DMDFonts:
   # Example follows; I don't actually use any, but this is how you would.
   # - key: 'CC_9px'
@@ -180,10 +180,13 @@ Audio:
       file: 'overwatch_theme.ogg'
     - key: 'overwatch_intro'
       file: 'overwatch_intro.ogg'
-    - key: 'invin_active'
-      file: 'invin_start.wav'
+    - key: 'anubis'
+      file: 'anubis.ogg'
+    - key: 'dorado'
+      file: 'dorado.wav'
     - key: 'route_66'
       file: 'route66.wav'
+      volume: 6.0
   Effects:
     # - key: 'ball_serve'
     #   file: 'BallServe.ogg'
@@ -218,29 +221,64 @@ Audio:
     - key: 'target_bank'
       file: 'ALERT_Appear.wav'
     - key: 'hanzo_stronger'
-      file: 'power_grows_stronger.ogg'
+      file: 'target_practice.ogg'
+      volume: 2.0
     - key: 'mei_miss'
       file: 'this_fight_is_not_over_yet.ogg'
+      volume: 2.0
     - key: 'invin_sfx'
       file: 'invin_mode.ogg'
+      volume: 2.0
     - key: 'winston_barr'
       file: 'barrier_up.ogg'
+      volume: 2.0
     - key: 'outhole_exit'
       file: 'bastionbwee.ogg'
     - key: 'bastion_sling'
       file: 'BastionSlingSound.ogg'
+      volume: 2.0
     - key: 'tracer_whee'
       file: 'tracer_whee.ogg'
+      volume: 2.0
     - key: 'tracer_try_again'
       file: 'tracer_try_again.ogg'
     - key: 'junkrat_tick_tock'
       file: 'junkrat_tick_tock.ogg'
+      volume: 2.0
     - key: 'defeat'
       file: 'defeat.ogg'
+      volume: 2.0
     - key: 'ult_50'
       file: 'ult_50.ogg'
+      volume: 2.0
     - key: 'ult_almost'
       file: 'ult_almost.ogg'
+      volume: 2.0
+    - key: 'boop'
+      file: 'boop.ogg'
+      volume: 2.0
+    - key: 'boosters'
+      file: 'boosters_engaged.ogg'
+      volume: 2.0
+    - key: 'death_comes'
+      file: 'death_comes.ogg'
+    - key: 'cheers_love'
+      file: 'cheers_love.ogg'
+      volume: 2.0
+    - key: 'blink_one'
+      file: 'blink_one.ogg'
+    - key: 'blink_two'
+      file: 'blink_two.wav'
+    - key: 'blink_three'
+      file: 'blink_three.wav'
+    - key: 'deadeye_ready'
+      file: 'deadeye_ready.ogg'
+    - key: 'dah_dah_whee'
+      file: 'dah_dah_whee.ogg'
+      volume: 2.0
+    - key: 'zwee'
+      file: 'zwee.ogg'
+      volume: 2.0
     - key: 'fish_in_barrell'
       file: 'fish_in_barrell.ogg'
     - key: 'high_noon'
