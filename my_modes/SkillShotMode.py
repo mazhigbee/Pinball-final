@@ -35,8 +35,8 @@ class SkillshotMode(procgame.game.AdvancedMode):
       self.direction = 1
     #self.game.displayText("Hit target %d" % self.number)
     # self.game.lamps.target3.schedule(0xf0f0f0)
-    self.game.lamps["target%d" % self.number].schedule(0xf0f0f0)
-    self.delay(name="next_target", delay=1.0, handler=self.next_target)
+    self.game.lamps["target%d" % self.number].enable()
+    self.delay(name="next_target", delay=1, handler=self.next_target)
 
   def mode_stopped(self):
     self.game.lamps.target1.disable()
@@ -45,7 +45,7 @@ class SkillshotMode(procgame.game.AdvancedMode):
     self.game.lamps.target4.disable()
     self.game.lamps.target5.disable()
     self.game.sound.fadeout_music()
-    self.game.sound.play_music('overwatch-main')
+    self.game.sound.play_music('overwatch_main')
 
   def evt_ball_starting(self):
     self.game.sound.stop_music()

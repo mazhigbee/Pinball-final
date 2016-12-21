@@ -19,6 +19,7 @@ class ChaseLoopMode(procgame.game.AdvancedMode):
 		self.cancel_delayed("over")
 
 	def hurry_up(self):
+		self.game.sound.play('junkrat_tick_tock')
 		self.game.lamps.chaseValue.schedule(0xF0F0F0F0)
 
 	def times_up(self):
@@ -35,6 +36,7 @@ class ChaseLoopMode(procgame.game.AdvancedMode):
 		self.game.lamps.chaseValue.disable()
 
 	def sw_chaseLoopHigh_active(self, sw):
+		self.game.sound.play('tracer_whee')
 		self.game.displayText("Scored %d" % self.scoreIncrease)
 		self.game.score(self.scoreIncrease)
 		self.scoreIncrease *= 2
